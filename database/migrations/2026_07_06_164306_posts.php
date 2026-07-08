@@ -22,7 +22,7 @@ return new class extends Migration
 			$table->enum('status', ['draft', 'published', 'archived'])->default('published');
 			$table->integer('views_count')->default(0);
 			$table->integer('likes_count')->default(0);
-			$table->timestamps();
+			$table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
 
 			$table->index('user_id');
 			$table->index('created_at');
