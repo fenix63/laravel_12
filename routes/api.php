@@ -26,3 +26,5 @@ Route::post('/posts/{id}/edit',[PostController::class,'editRecord']);
 */
 
 Route::post('/addpost/', [PostController::class, 'create']);
+Route::get('/getallposts/', [PostController::class, 'show']);
+Route::get('/getpost/', [PostController::class, 'getPost']);

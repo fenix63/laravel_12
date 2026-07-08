@@ -15,12 +15,16 @@ class PostController extends Controller
         //
     }
 
+	public function showPostItem($id)
+	{
+		return view('postitem');
+	}
+
     /**
      * Show the form for creating a new resource.
      */
     public function create(Request $request)
     {
-		//$id = Post::addPost($request);
 		Post::addPost($request);
 		return response()->json(['result' => 'success']);
     }
@@ -36,10 +40,19 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request)
     {
-        //
-    }
+        $allPosts = Post::getAllPosts($request);
+		$allPostsArray = response()->json(['result' => $allPosts])->getData(assoc: true);
+		//return response()->json(['result' => $allPostsArray['result']]);
+    	return $allPostsArray;
+	}
+
+	public function getPost(Request $request)
+	{
+		$postData = Post::getPostItem($request);
+		return $postData;
+	}
 
     /**
      * Show the form for editing the specified resource.
