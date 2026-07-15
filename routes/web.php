@@ -32,3 +32,4 @@ Route::get('/posts', function (Request $request) {
 */
 
 Route::get('/postitem/{id}', [PostController::class, 'showPostItem'])->name('postitem');
+Route::get('/admin', [PostController::class, 'showAdminPage'])->name('admin');

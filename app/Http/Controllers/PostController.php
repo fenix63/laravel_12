@@ -15,9 +15,17 @@ class PostController extends Controller
         //
     }
 
-	public function showPostItem($id)
+	public function showPostItem(int $id)
 	{
-		return view('postitem');
+		$postData = Post::getPostById($id);
+		$postData = $postData->getData(assoc: true);
+
+		return view('postitem',['postdata' => $postData]);
+	}
+
+	public function showAdminPage()
+	{
+		return view('admin');
 	}
 
     /**
@@ -46,6 +54,11 @@ class PostController extends Controller
 		$allPostsArray = response()->json(['result' => $allPosts])->getData(assoc: true);
 		//return response()->json(['result' => $allPostsArray['result']]);
     	return $allPostsArray;
+	}
+
+	public function getPostById(int $postId)
+	{
+		$data = Post::getPostById($postId);
 	}
 
 	public function getPost(Request $request)

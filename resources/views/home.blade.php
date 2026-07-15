@@ -355,10 +355,6 @@
                     <div class="post-meta">
                         <span><i class="far fa-calendar-alt"></i>{{$post['created_at']}}</span>
                         <span><i class="far fa-clock"></i> 6 мин чтения</span>
-                        <span class="post-tags">
-                            <span><i class="fas fa-tag"></i> мышление</span>
-                            <span><i class="fas fa-tag"></i> саморазвитие</span>
-                        </span>
                     </div>
                 </div>
             </div>

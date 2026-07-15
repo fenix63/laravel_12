@@ -33,6 +33,12 @@ class Post extends Model
 		Post::insert($dataToAdd);
 	}
 
+	public static function getPostById(int $postId)
+	{
+		$postData = self::find($postId);
+		return response()->json(['result' => $postData]);
+	}
+
 	public static function getPostItem(Request $request)
 	{
 		$postid = $request->query('postid');
