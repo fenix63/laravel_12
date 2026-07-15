@@ -33,9 +33,22 @@ class PostController extends Controller
      */
     public function create(Request $request)
     {
-		Post::addPost($request);
+		Post::addPosts($request);
 		return response()->json(['result' => 'success']);
     }
+
+	public function addPost(Request $request)
+	{
+		$recordId = Post::addPost($request);
+		return response()->json(['result' => $recordId]);
+	}
+
+	public function deletePost(Request $request)
+	{
+		$postId = $request->input('id');
+		$deleteResult = Post::deletePostById($postId);
+		return response()->json(['result' => $deleteResult]);
+	}
 
     /**
      * Store a newly created resource in storage.

@@ -25,6 +25,10 @@ Route::post('/addpost/',[PostController::class,'addRecord']);
 Route::post('/posts/{id}/edit',[PostController::class,'editRecord']);
 */
 
-Route::post('/addpost/', [PostController::class, 'create']);
+Route::post('/addposts/', [PostController::class, 'create']);
+Route::post('/addpost/', [PostController::class, 'addPost']);
+Route::post('/deletepost/', [PostController::class, 'deletePost']);
+
+
 Route::get('/getallposts/', [PostController::class, 'show']);
 Route::get('/getpost/', [PostController::class, 'getPost']);
