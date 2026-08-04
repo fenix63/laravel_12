@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 
 class Post extends Model
 {
 
+	const TABLE_NAME = 'posts';
 	public static function addPost(Request $request):int
 	{
 		$columns = Schema::getColumnListing('posts');
@@ -84,6 +86,33 @@ class Post extends Model
 
 		if($result)
 			return true;
+
+		return false;
+	}
+
+	public static function updatePost(Request $request): bool
+	{
+		$postId = $request->input('postId');
+		$postItem = self::find($postId);
+		if ($postItem) {
+			$postData = $request->input('postData');
+			if (!empty($postData)) {
+				$newData = [];
+				foreach ($postData as $column => $value) {
+					$newData[$column] = $value;
+				}
+			}
+		}
+
+		//Вариант через queryBuilder
+		if (isset($newData)) {
+			$affected = DB::table(self::TABLE_NAME)
+				->where('id', $postId)
+				->update($newData);
+
+			if ($affected > 0)
+				return true;
+		}
 
 		return false;
 	}

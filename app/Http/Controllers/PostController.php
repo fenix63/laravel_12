@@ -25,7 +25,9 @@ class PostController extends Controller
 
 	public function showAdminPage()
 	{
-		return view('admin');
+		$allPosts = Post::all();
+		$allPostsArray = response()->json(['result' => $allPosts])->getData(assoc: true);
+		return view('admin', ['data' => $allPostsArray]);
 	}
 
     /**
@@ -48,6 +50,12 @@ class PostController extends Controller
 		$postId = $request->input('id');
 		$deleteResult = Post::deletePostById($postId);
 		return response()->json(['result' => $deleteResult]);
+	}
+
+	public function updatePost(Request $request)
+	{
+		$isSuccess = Post::updatePost($request);
+		return response()->json(['result' => $isSuccess]);
 	}
 
     /**
