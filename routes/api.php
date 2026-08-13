@@ -4,6 +4,7 @@ use App\Http\Controllers\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\CommentController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -33,3 +34,5 @@ Route::post('/updatepost/', [PostController::class, 'updatePost']);
 
 Route::get('/getallposts/', [PostController::class, 'show']);
 Route::get('/getpost/', [PostController::class, 'getPost']);
+
+Route::post('/addcomment/',[CommentController::class,'create']);

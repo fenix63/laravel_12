@@ -12,6 +12,7 @@
     <!-- Дополнительные стили -->
     @vite(['resources/css/custom.css'])
     <!--<link rel="stylesheet" href="{{ asset('css/custom.css') }}">-->
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 </head>
 <body>
 <div id="app">

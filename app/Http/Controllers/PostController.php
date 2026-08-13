@@ -20,7 +20,10 @@ class PostController extends Controller
 		$postData = Post::getPostById($id);
 		$postData = $postData->getData(assoc: true);
 
-		return view('postitem',['postdata' => $postData]);
+		//Получаем комментарии к этому посту
+		$comments = CommentController::getPostComments($id)->getData(true);
+
+		return view('postitem',['postdata' => $postData, 'comments'=>$comments]);
 	}
 
 	public function showAdminPage()

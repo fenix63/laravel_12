@@ -8,7 +8,11 @@
 @section('content')
 
 
-
+<?php
+//echo '<pre>';
+//print_r($posts);
+//echo '</pre>';
+?>
 
 <div class="post-container">
     <!-- Заголовок -->
@@ -27,7 +31,7 @@
                 <div class="post-avatar">🧠</div>
                 <div class="post-content">
                     <div class="post-title">
-                        {{$post['title']}}
+                        <a href="/posts/{{$post['id']}}" target="_blank">{{$post['title']}}</a>
                         <span class="badge"><i class="far fa-star"></i> топ</span>
                     </div>
                     <div class="post-excerpt">
