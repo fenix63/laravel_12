@@ -515,7 +515,8 @@
         </h1>
         <div class="header-actions">
             <button class="btn btn-outline"><i class="fas fa-file-export"></i> Экспорт</button>
-            <button class="btn btn-primary"><i class="fas fa-plus-circle"></i> Создать пост</button>
+            <!-- Используйте компонент -->
+            <livewire:modal-component />
         </div>
     </header>
 
