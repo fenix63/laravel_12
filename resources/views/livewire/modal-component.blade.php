@@ -15,14 +15,81 @@
             <div class="modal-body">
                 <!-- Содержимое модального окна -->
                 <form>
-                    <div class="form-group">
-                        <label>Заголовок</label>
-                        <input type="text" class="form-control" placeholder="Введите заголовок">
+                    <!-- ID пользователя с иконкой -->
+                    <div class="form-group form-group-icon">
+                        <label for="user_id">ID пользователя <span class="required">*</span></label>
+                        <input
+                                id="user_id"
+                                name="user_id"
+                                type="text"
+                                class="form-control"
+                                placeholder="Введите ID пользователя"
+                        >
+                        <span class="icon">👤</span>
                     </div>
-                    <div class="form-group">
-                        <label>Содержание</label>
-                        <textarea class="form-control" rows="5"></textarea>
+
+                    <!-- Название поста -->
+                    <div class="form-group form-group-icon">
+                        <label for="title">Название поста <span class="required">*</span></label>
+                        <input
+                                id="title"
+                                name="title"
+                                type="text"
+                                class="form-control"
+                                placeholder="Придумайте заголовок"
+                                value=""
+                        >
+                        <span class="icon">📌</span>
                     </div>
+
+                    <!-- Текст поста -->
+                    <div class="form-group form-group-icon textarea-icon">
+                        <label for="content">Текст поста <span class="required">*</span></label>
+                        <textarea
+                                id="content"
+                                name="content"
+                                class="form-control"
+                                placeholder="Напишите содержание поста..."
+                        ></textarea>
+                        <span class="icon" style="top: 16px; transform: none;">📄</span>
+                    </div>
+
+                    <!-- Два поля в ряд: просмотры и лайки -->
+                    <div class="form-row">
+                        <div class="form-group form-group-icon">
+                            <label for="views_count">Просмотры</label>
+                            <input
+                                    id="views_count"
+                                    name="views_count"
+                                    type="number"
+                                    class="form-control"
+                                    placeholder="0"
+                                    min="0"
+                            >
+                            <span class="icon">👁️</span>
+                        </div>
+
+                        <div class="form-group form-group-icon">
+                            <label for="likes_count">Лайки</label>
+                            <input
+                                    id="likes_count"
+                                    name="likes_count"
+                                    type="number"
+                                    class="form-control"
+                                    placeholder="0"
+                                    min="0"
+                            >
+                            <span class="icon">❤️</span>
+                        </div>
+                    </div>
+
+                    <!-- Декоративная линия -->
+                    <div class="form-divider"></div>
+
+                    <!-- Кнопка отправки -->
+                    <button type="submit" class="btn-submit">
+                        ✨ Опубликовать пост
+                    </button>
                 </form>
             </div>
             <div class="modal-footer">
@@ -33,6 +100,7 @@
     </div>
     @endif
 </div>
+
 
 <style>
     .modal-overlay {
@@ -52,7 +120,7 @@
         background: white;
         border-radius: 8px;
         padding: 20px;
-        max-width: 500px;
+        max-width: 900px;
         width: 90%;
         max-height: 80vh;
         overflow-y: auto;
