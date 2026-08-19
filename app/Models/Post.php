@@ -14,6 +14,8 @@ class Post extends Model
 	const TABLE_NAME = 'posts';
 	public static function addPost(Request $request):int
 	{
+		$allData = $request->all();
+
 		$columns = Schema::getColumnListing('posts');
 		$keyToDelete = ['id','created_at','updated_at'];
 
@@ -32,6 +34,12 @@ class Post extends Model
 
 		$recordId = Post::insertGetId($dataToAdd);
 
+		return $recordId;
+	}
+
+	public static function addPostFromForm(array $data)
+	{
+		$recordId = Post::insertGetId($data);
 		return $recordId;
 	}
 	public static function addPosts(Request $request)

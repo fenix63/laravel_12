@@ -6,98 +6,102 @@
 
     <!-- Модальное окно -->
     @if($showModal)
-    <div class="modal-overlay" wire:click.self="closeModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Создание поста</h3>
-                <button wire:click="closeModal" class="close-btn">&times;</button>
-            </div>
-            <div class="modal-body">
-                <!-- Содержимое модального окна -->
-                <form>
-                    <!-- ID пользователя с иконкой -->
-                    <div class="form-group form-group-icon">
-                        <label for="user_id">ID пользователя <span class="required">*</span></label>
-                        <input
-                                id="user_id"
-                                name="user_id"
-                                type="text"
-                                class="form-control"
-                                placeholder="Введите ID пользователя"
-                        >
-                        <span class="icon">👤</span>
-                    </div>
+        <div class="modal-overlay" wire:click.self="closeModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Создание поста</h3>
+                    <button wire:click="closeModal" class="close-btn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <!-- Содержимое модального окна -->
+                    <!--savePost - название метода, который будет вызван из класса компонента-->
+                    <form wire:submit.prevent="savePost">
 
-                    <!-- Название поста -->
-                    <div class="form-group form-group-icon">
-                        <label for="title">Название поста <span class="required">*</span></label>
-                        <input
-                                id="title"
-                                name="title"
-                                type="text"
-                                class="form-control"
-                                placeholder="Придумайте заголовок"
-                                value=""
-                        >
-                        <span class="icon">📌</span>
-                    </div>
-
-                    <!-- Текст поста -->
-                    <div class="form-group form-group-icon textarea-icon">
-                        <label for="content">Текст поста <span class="required">*</span></label>
-                        <textarea
-                                id="content"
-                                name="content"
-                                class="form-control"
-                                placeholder="Напишите содержание поста..."
-                        ></textarea>
-                        <span class="icon" style="top: 16px; transform: none;">📄</span>
-                    </div>
-
-                    <!-- Два поля в ряд: просмотры и лайки -->
-                    <div class="form-row">
+                        <!-- ID пользователя с иконкой -->
                         <div class="form-group form-group-icon">
-                            <label for="views_count">Просмотры</label>
+                            <label for="user_id">ID пользователя <span class="required">*</span></label>
                             <input
-                                    id="views_count"
-                                    name="views_count"
-                                    type="number"
+                                    id="user_id"
+                                    name="user_id"
+                                    wire:model="user_id"
+                                    type="text"
                                     class="form-control"
-                                    placeholder="0"
-                                    min="0"
+                                    placeholder="Введите ID пользователя"
                             >
-                            <span class="icon">👁️</span>
+                            <span class="icon">👤</span>
                         </div>
 
+                        <!-- Название поста -->
                         <div class="form-group form-group-icon">
-                            <label for="likes_count">Лайки</label>
+                            <label for="title">Название поста <span class="required">*</span></label>
                             <input
-                                    id="likes_count"
-                                    name="likes_count"
-                                    type="number"
+                                    id="title"
+                                    name="title"
+                                    wire:model="title"
+                                    type="text"
                                     class="form-control"
-                                    placeholder="0"
-                                    min="0"
+                                    placeholder="Придумайте заголовок"
+                                    value=""
                             >
-                            <span class="icon">❤️</span>
+                            <span class="icon">📌</span>
                         </div>
-                    </div>
 
-                    <!-- Декоративная линия -->
-                    <div class="form-divider"></div>
+                        <!-- Текст поста -->
+                        <div class="form-group form-group-icon textarea-icon">
+                            <label for="content">Текст поста <span class="required">*</span></label>
+                            <textarea
+                                    id="content"
+                                    name="content"
+                                    wire:model="content"
+                                    class="form-control"
+                                    placeholder="Напишите содержание поста..."
+                            ></textarea>
+                            <span class="icon" style="top: 16px; transform: none;">📄</span>
+                        </div>
 
-                    <!-- Кнопка отправки -->
-                    <button type="submit" class="btn-submit">
-                        ✨ Опубликовать пост
-                    </button>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button wire:click="closeModal" class="btn btn-secondary">Отмена</button>
-                <button class="btn btn-primary">Сохранить</button>
+                        <!-- Два поля в ряд: просмотры и лайки -->
+                        <div class="form-row">
+                            <div class="form-group form-group-icon">
+                                <label for="views_count">Просмотры</label>
+                                <input
+                                        id="views_count"
+                                        name="views_count"
+                                        wire:model="views_count"
+                                        type="number"
+                                        class="form-control"
+                                        placeholder="0"
+                                        min="0"
+                                >
+                                <span class="icon">👁️</span>
+                            </div>
+
+                            <div class="form-group form-group-icon">
+                                <label for="likes_count">Лайки</label>
+                                <input
+                                        id="likes_count"
+                                        name="likes_count"
+                                        wire:model="likes_count"
+                                        type="number"
+                                        class="form-control"
+                                        placeholder="0"
+                                        min="0"
+                                >
+                                <span class="icon">❤️</span>
+                            </div>
+                        </div>
+
+                        <!-- Декоративная линия -->
+                        <div class="form-divider"></div>
+                        <div class="modal-footer">
+                            <button wire:click="closeModal" class="btn btn-secondary">Отмена</button>
+                            <button type="submit" class="btn-submit btn btn-primary">Сохранить</button>
+                        </div>
+                    </form>
+
+                </div>
+
             </div>
         </div>
-    </div>
     @endif
 </div>
 

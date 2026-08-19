@@ -48,6 +48,12 @@ class PostController extends Controller
 		return response()->json(['result' => $recordId]);
 	}
 
+	public function addPostFromForm(array $data)
+	{
+		$recordId = Post::addPostFromForm($data);
+		return response()->json(['result' => $recordId]);
+	}
+
 	public function deletePost(Request $request)
 	{
 		$postId = $request->input('id');

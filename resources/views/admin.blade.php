@@ -572,13 +572,17 @@
 					$createdAt = new DateTime($postItem['created_at']);
 					$postItem['created_at_formatted'] = $createdAt->format('d.m.Y');
                 }
+
+                //echo '<pre>';
+                //print_r($data['result']);
+                //echo '</pre>';
             ?>
 
             @foreach($data['result'] as $postItem)
                 <tr>
                     <td class="checkbox-col" data-label="Выбрать"><input type="checkbox"></td>
                     <td data-label="Заголовок">
-                        <span class="post-title">{{$postItem['title']}}</span>
+                        <span class="post-title"><a href="/posts/{{$postItem['id']}}" target="_blank">{{$postItem['title']}}</a></span>
                         <span class="post-meta"><i class="far fa-user-circle"></i> Имя и отчество автора поста</span>
                     </td>
                     <td data-label="Статус"><span class="status-badge published"><i class="fas fa-circle" style="font-size: 0.4rem;"></i>{{$postItem['status']}}</span></td>
