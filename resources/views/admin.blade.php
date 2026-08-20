@@ -510,7 +510,6 @@
     <!-- ШАПКА -->
     <header class="admin-header">
         <h1>
-            <i class="fas fa-pen-fancy"></i>
             Управление постами
         </h1>
         <div class="header-actions">
@@ -568,43 +567,48 @@
             <tbody>
             <!-- Пост 1 -->
             <?
-                foreach($data['result'] as &$postItem){
+                /*foreach($data['result'] as &$postItem){
 					$createdAt = new DateTime($postItem['created_at']);
 					$postItem['created_at_formatted'] = $createdAt->format('d.m.Y');
-                }
+                }*/
 
-                //echo '<pre>';
-                //print_r($data['result']);
-                //echo '</pre>';
+//                echo '<pre>';
+//                print_r($data['result']);
+//                echo '</pre>';
             ?>
 
             @foreach($data['result'] as $postItem)
-                <tr>
+
+                <tr data-id="{{$postItem['id']}}">
                     <td class="checkbox-col" data-label="Выбрать"><input type="checkbox"></td>
                     <td data-label="Заголовок">
-                        <span class="post-title"><a href="/posts/{{$postItem['id']}}" target="_blank">{{$postItem['title']}}</a></span>
+                        <span class="post-title">
+                            <a href="/posts/{{$postItem['id']}}" target="_blank">
+                                {{$postItem['title']}} ({{$postItem['id']}})
+                            </a>
+                        </span>
                         <span class="post-meta"><i class="far fa-user-circle"></i> Имя и отчество автора поста</span>
                     </td>
                     <td data-label="Статус"><span class="status-badge published"><i class="fas fa-circle" style="font-size: 0.4rem;"></i>{{$postItem['status']}}</span></td>
-                    <td data-label="Дата">{{$postItem['created_at_formatted']}}</td>
+                    <td data-label="Дата"></td>
                     <td data-label="Действия" style="text-align: right;">
                         <div class="actions-cell" style="justify-content: flex-end;">
-                            <button class="btn-sm view"><i class="fas fa-eye"></i> </button>
+                            <?/*<button class="btn-sm view" wire:click="openModal"><i class="fas fa-eye"></i> </button>*/?>
+                            <livewire:showpost-component />
+
+
                             <button class="btn-sm edit"><i class="fas fa-edit"></i> </button>
                             <button class="btn-sm delete"><i class="fas fa-trash-alt"></i> </button>
                         </div>
                     </td>
                 </tr>
-
             @endforeach
-
-
 
             </tbody>
         </table>
 
         <!-- ПАГИНАЦИЯ -->
-        <div class="pagination-bar">
+        <?/*<div class="pagination-bar">
             <div class="pagination-info">
                 <span class="fw-500">1–5</span> из <span class="fw-500">24</span> постов
             </div>
@@ -618,13 +622,8 @@
             </div>
         </div>
     </div>
+*/?>
 
-    <!-- небольшая дополнительная информация -->
-    <div style="margin-top: 24px; display: flex; justify-content: flex-end; gap: 12px; font-size: 0.9rem; color: #475569; flex-wrap: wrap;">
-        <span><i class="far fa-check-circle" style="color: #16a34a;"></i> 3 опубликовано</span>
-        <span><i class="far fa-file-alt" style="color: #64748b;"></i> 2 черновика</span>
-        <span><i class="far fa-archive" style="color: #b91c1c;"></i> 1 архив</span>
-    </div>
 </div>
 </body>
 </html>
