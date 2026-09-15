@@ -66,7 +66,7 @@
                             <button type="button" class="btn btn-secondary" onclick="resetForm()">
                                 Очистить
                             </button>
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="update btn btn-primary">
                                 Обновить
                             </button>
                         </div>
@@ -211,27 +211,27 @@
         font-family: inherit;
     }
 
-    .btn-primary {
+    .update.btn-primary {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: #ffffff;
         box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
     }
 
-    .btn-primary:hover {
+    .update.btn-primary:hover {
         transform: translateY(-2px);
         box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
     }
 
-    .btn-primary:active {
+    .update.btn-primary:active {
         transform: translateY(0);
     }
 
-    .btn-secondary {
+    .update.btn-secondary {
         background: #edf2f7;
         color: #4a5568;
     }
 
-    .btn-secondary:hover {
+    .update.btn-secondary:hover {
         background: #e2e8f0;
     }
 
