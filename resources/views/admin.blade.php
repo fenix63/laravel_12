@@ -597,7 +597,9 @@
                             <livewire:showpost-component />
 
 
-                            <button class="btn-sm edit"><i class="fas fa-edit"></i> </button>
+                            <?/*<button class="btn-sm edit"><i class="fas fa-edit"></i> </button>*/?>
+                            <livewire:editpost-component />
+
                             <button class="btn-sm delete"><i class="fas fa-trash-alt"></i> </button>
                         </div>
                     </td>

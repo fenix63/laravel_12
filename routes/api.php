@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MessageController;
@@ -36,3 +37,7 @@ Route::get('/getallposts/', [PostController::class, 'show']);
 Route::get('/getpost/', [PostController::class, 'getPost']);
 
 Route::post('/addcomment/',[CommentController::class,'create']);
+
+//CRUD для пользователей
+Route::post('/adduser/', [UserController::class, 'addUser']);
+Route::get('/getusers/', [UserController::class, 'getAllUsers']);

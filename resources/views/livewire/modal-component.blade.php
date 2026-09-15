@@ -20,15 +20,15 @@
                         <!-- ID пользователя с иконкой -->
                         <div class="form-group form-group-icon">
                             <label for="user_id">ID пользователя <span class="required">*</span></label>
-                            <input
-                                    id="user_id"
-                                    name="user_id"
-                                    wire:model="user_id"
-                                    type="text"
-                                    class="form-control"
-                                    placeholder="Введите ID пользователя"
-                            >
-                            <span class="icon">👤</span>
+
+                            <select id="user_id" name="user_id" wire:model="user_id" class="form-control">
+                                <option value="">Выберите Пользователя</option>
+
+                                @foreach($users['result'] as $user)
+                                    <option value="{{$user['id']}}">{{$user['name']}} ({{$user['id']}})</option>
+                                @endforeach
+
+                            </select>
                         </div>
 
                         <!-- Название поста -->

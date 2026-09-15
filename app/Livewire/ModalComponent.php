@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Illuminate\Http\Request;
 use Livewire\Component;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 
 class ModalComponent extends Component
 {
@@ -15,6 +16,8 @@ class ModalComponent extends Component
 	public $content = '';
 	public $views_count = 0;
 	public $likes_count = 0;
+
+	public $users = [];
 
 	public function render()
 	{
@@ -41,6 +44,9 @@ class ModalComponent extends Component
 	public function openModal()
 	{
 		$this->showModal = true;
+
+		//Тут нужно добавить получение данных по пользователям
+		$this->users = UserController::getAllUsers();
 	}
 
 	public function closeModal()
