@@ -13,11 +13,15 @@ class UserController extends Controller
 		return response()->json(['result' => $recordId]);
     }
 
-	public static function getAllUsers()
+	public static function getAllUsers(array $select = [])
 	{
-		$allUsers = User::getAllUsers();
+		$allUsers = User::getAllUsers($select);
 		$allUsersArray = response()->json(['result' => $allUsers])->getData(assoc: true);
-		//return response()->json(['result' => $allPostsArray['result']]);
 		return $allUsersArray;
+	}
+
+	public static function getUserByFilter(array $filter, array $select)
+	{
+		return User::getUserByFilter($filter, $select);
 	}
 }

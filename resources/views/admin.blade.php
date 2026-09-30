@@ -593,12 +593,11 @@
                     <td data-label="Дата"></td>
                     <td data-label="Действия" style="text-align: right;">
                         <div class="actions-cell" style="justify-content: flex-end;">
-                            <?/*<button class="btn-sm view" wire:click="openModal"><i class="fas fa-eye"></i> </button>*/?>
                             <livewire:showpost-component />
 
 
-                            <?/*<button class="btn-sm edit"><i class="fas fa-edit"></i> </button>*/?>
-                            <livewire:editpost-component />
+
+                            <livewire:editpost-component :post_id="$postItem['id']" />
 
                             <button class="btn-sm delete"><i class="fas fa-trash-alt"></i> </button>
                         </div>

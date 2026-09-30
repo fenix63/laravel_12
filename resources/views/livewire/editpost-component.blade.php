@@ -3,17 +3,18 @@
         <i class="fas fa-edit"></i>
     </button>
 
+
+
     @if($showModal)
     <div class="modal-overlay">
         <div class="modal-content">
             <div class="modal-body">
-                <div class="form-container">
                     <div class="modal-header">
-                        <h3>Создание поста</h3>
                         <button wire:click="closeModal" class="close-btn">&times;</button>
                     </div>
                     <div class="form-header">
                         <h1>Обновление поста</h1>
+
                         <p>Заполните поля для обновления записи</p>
                     </div>
 
@@ -23,14 +24,17 @@
                             <label for="userId">
                                 ID пользователя<span class="required">*</span>
                             </label>
-                            <input
-                                    type="number"
-                                    id="userId"
-                                    name="userId"
-                                    placeholder="Введите ID пользователя"
-                                    min="1"
-                                    required
-                            >
+                            <?//TODO: Заменить на Select?>
+                            <select name="userId" id="userId">
+                                @foreach($postData['allUsers']['result'] as $userItem)
+                                    @if($userItem['id']==$postData['result'][0]['user_id'])
+                                        <option value="{{$userItem['id']}}" selected>{{$userItem['name']}}</option>
+                                    @else
+                                        <option value="{{$userItem['id']}}">{{$userItem['name']}}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+
                         </div>
 
                         <!-- Название -->
@@ -44,6 +48,7 @@
                                     name="title"
                                     placeholder="Введите название поста"
                                     maxlength="255"
+                                    value="<?=$postData['result'][0]['title']?>"
                                     required
                             >
                         </div>
@@ -59,7 +64,22 @@
                                     placeholder="Введите содержимое поста..."
                                     rows="5"
                                     required
-                            ></textarea>
+                            ><?=$postData['result'][0]['content']?></textarea>
+                        </div>
+
+                        <!-- Статус (выпадающий список) -->
+                        <div class="form-group">
+                            <label for="status">
+                                Статус<span class="required">*</span>
+                            </label>
+                            <select id="status" name="status" required>
+                                <option value="" disabled>Выберите статус</option>
+
+                                <option value="draft">Черновик</option>
+                                <option value="published">Опубликован</option>
+                                <option value="archived">В архиве</option>
+
+                            </select>
                         </div>
 
                         <div class="form-actions">
@@ -71,7 +91,7 @@
                             </button>
                         </div>
                     </form>
-                </div>
+
             </div>
         </div>
     </div>
@@ -80,42 +100,7 @@
 
 </div>
 
-<script>
-    // Обработчик отправки формы
-    document.getElementById('updatePostForm').addEventListener('submit', function(e) {
-        e.preventDefault();
 
-        const formData = {
-            userId: document.getElementById('userId').value,
-            title: document.getElementById('title').value,
-            content: document.getElementById('content').value
-        };
-
-        console.log('Отправка данных:', formData);
-
-        // Здесь можно добавить fetch-запрос к API:
-        /*
-		fetch('/api/posts/update', {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(formData)
-		})
-		.then(res => res.json())
-		.then(data => {
-			alert('Пост успешно обновлён!');
-		})
-		.catch(err => {
-			alert('Ошибка при обновлении поста');
-			console.error(err);
-		});
-		*/
-    });
-
-    // Очистка формы
-    function resetForm() {
-        document.getElementById('updatePostForm').reset();
-    }
-</script>
 
 
 <style>
@@ -243,5 +228,28 @@
         .form-actions {
             flex-direction: column;
         }
+    }
+
+    .form-group select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-image: url(data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23718096' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e);
+        background-repeat: no-repeat;
+        background-position: right 14px center;
+        background-size: 18px;
+        padding-right: 44px;
+        cursor: pointer;
+
+        width: 100%;
+        padding: 12px 16px;
+        border: 2px solid #e2e8f0;
+        border-radius: 10px;
+        font-size: 15px;
+        font-family: inherit;
+        color: #2d3748;
+        background: #f7fafc;
+        transition: all 0.2s ease;
+        outline: none;
     }
 </style>

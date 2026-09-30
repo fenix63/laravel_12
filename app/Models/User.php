@@ -73,8 +73,16 @@ class User extends Authenticatable
 		return $recordId;
 	}
 
-	public static function getAllUsers(): Collection
+	public static function getAllUsers($select = []): Collection
 	{
+		if(!empty($select))
+			return self::all($select);
 		return self::all();
+	}
+
+	public static function getUserByFilter(array $filter, array $select)
+	{
+		$query = self::where('id', $filter['id'])->get($select);
+		return response()->json(['result' => $query])->getData(assoc: true);
 	}
 }

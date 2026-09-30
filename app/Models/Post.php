@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
@@ -69,7 +71,13 @@ class Post extends Model
 	public static function getPostById(int $postId)
 	{
 		$postData = self::find($postId);
-		return response()->json(['result' => $postData]);
+		return response()->json(['result' => $postData])->getData(assoc: true);
+	}
+
+	public static function getPostDataByFilter(array $filter, array $select):array
+	{
+		$query = self::where('id', $filter['id'])->get($select);
+		return response()->json(['result' => $query])->getData(assoc: true);
 	}
 
 	public static function getPostItem(Request $request)
@@ -123,5 +131,22 @@ class Post extends Model
 		}
 
 		return false;
+	}
+
+	public static function getPostStatusList()
+	{
+		$tableName = (new \App\Models\User)->getTable();
+		$columnName = 'status';
+
+		// Вытаскиваем тип столбца из структуры БД
+		$query = "SHOW COLUMNS FROM {$tableName} WHERE Field = ". $columnName;
+		$type = DB::select($query)[0]->Type;
+
+		preg_match('/^enum\((.*)\)$/', $type, $matches);
+		$values = array_map(function($value) {
+			return trim($value, "'");
+		}, explode(',', $matches[1]));
+
+		return $values;
 	}
 }

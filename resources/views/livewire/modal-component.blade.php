@@ -4,6 +4,8 @@
         <i class="fas fa-plus-circle"></i> Добавить пост
     </button>
 
+
+
     <!-- Модальное окно -->
     @if($showModal)
         <div class="modal-overlay" wire:click.self="closeModal">

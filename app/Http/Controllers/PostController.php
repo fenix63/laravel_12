@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\Post;
 
@@ -86,9 +87,14 @@ class PostController extends Controller
     	return $allPostsArray;
 	}
 
-	public function getPostById(int $postId)
+	public static function getPostById(int $postId)
 	{
-		$data = Post::getPostById($postId);
+		return Post::getPostById($postId);
+	}
+
+	public static function getPostDataByFilter(array $filter, array $select):array
+	{
+		return Post::getPostDataByFilter($filter,$select);
 	}
 
 	public function getPost(Request $request)
