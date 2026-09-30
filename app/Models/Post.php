@@ -135,11 +135,11 @@ class Post extends Model
 
 	public static function getPostStatusList()
 	{
-		$tableName = (new \App\Models\User)->getTable();
+		$tableName = (new \App\Models\Post)->getTable();
 		$columnName = 'status';
 
 		// Вытаскиваем тип столбца из структуры БД
-		$query = "SHOW COLUMNS FROM {$tableName} WHERE Field = ". $columnName;
+		$query = "SHOW COLUMNS FROM {$tableName} WHERE Field = '". $columnName."'";
 		$type = DB::select($query)[0]->Type;
 
 		preg_match('/^enum\((.*)\)$/', $type, $matches);
@@ -147,6 +147,24 @@ class Post extends Model
 			return trim($value, "'");
 		}, explode(',', $matches[1]));
 
-		return $values;
+		$map = self::getPostStatusListMap();
+		$keys = array_keys($map);
+		$out = [];
+		foreach($values as $status){
+			if (in_array($status, $keys)) {
+				$out[$status] = $map[$status];
+			}
+		}
+
+		return $out;
+	}
+
+	public static function getPostStatusListMap(): array
+	{
+		return  [
+			'draft' => 'Черновик',
+			'published' => 'Опубликован',
+			'archived' => 'В архиве'
+		];
 	}
 }

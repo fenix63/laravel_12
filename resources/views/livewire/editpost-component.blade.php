@@ -16,6 +16,7 @@
                         <h1>Обновление поста</h1>
 
                         <p>Заполните поля для обновления записи</p>
+
                     </div>
 
                     <form id="updatePostForm" method="POST" action="/posts/update">
@@ -74,10 +75,14 @@
                             </label>
                             <select id="status" name="status" required>
                                 <option value="" disabled>Выберите статус</option>
+                                <option value="{{$postData['result'][0]['status']}}" selected>{{$postData['statusList'][$postData['result'][0]['status']]}}</option>
 
-                                <option value="draft">Черновик</option>
-                                <option value="published">Опубликован</option>
-                                <option value="archived">В архиве</option>
+
+                                @foreach($postData['statusList'] as $key => $statusItem)
+                                    @if($key!==$this->postData['result'][0]['status'])
+                                        <option value="{{$key}}">{{$statusItem}}</option>
+                                    @endif
+                                @endforeach
 
                             </select>
                         </div>

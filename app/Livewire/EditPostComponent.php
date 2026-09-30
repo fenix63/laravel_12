@@ -39,6 +39,10 @@ class EditPostComponent extends Component
 		$this->postData['result'][0]['user_name'] = $this->postData['allUsers']['result'][$index]['name'];
 
 		$this->postData['statusList'] = Post::getPostStatusList();
+		//$index = array_search($this->postData['result'][0]['status'],$this->postData['statusList']);
+		//if($index!==false)
+		//unset($this->postData['statusList'][$this->postData['result'][0]['status']]);
+
 	}
 
 	public function closeModal()
