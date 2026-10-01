@@ -18,7 +18,7 @@ class MessageController extends Controller
 			$suffix = '';
 		}
 
-		$fileName = 'dbg-' . date('Ymd') . $suffix . '.txt';
+		$fileName = 'dbg-' . date('Y-m-d_H_i_s') . $suffix . '.txt';
 
 		//$r = fopen("C:\\OSPanel\\home\\laravel12\\public\\app\\Http\\Controllers\\".$fileName, 'a');
 		$r = fopen("/var/www/laravel/logs/" . $fileName, 'a');

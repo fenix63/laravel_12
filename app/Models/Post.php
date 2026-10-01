@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\DB;
 class Post extends Model
 {
 
+	protected $fillable = [
+		'title'
+	];
+
 	const TABLE_NAME = 'posts';
 	public static function addPost(Request $request):int
 	{
@@ -131,6 +135,15 @@ class Post extends Model
 		}
 
 		return false;
+	}
+
+	public static function updatePostFromForm(array $data)
+	{
+		$user = User::find($data['post_id']);
+		$user->update([
+			'name' => 'Иван',
+			'email' => 'ivan@example.com',
+		]);
 	}
 
 	public static function getPostStatusList()

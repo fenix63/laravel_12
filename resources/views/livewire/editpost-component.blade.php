@@ -16,19 +16,24 @@
                         <h1>Обновление поста</h1>
 
                         <p>Заполните поля для обновления записи</p>
+                        <?
+                        //echo '<pre>';
+                        //print_r($postData);
+                        //echo '</pre>';
 
+                        ?>
                     </div>
 
-                    <form id="updatePostForm" method="POST" action="/posts/update">
+                    <form id="updatePostForm" method="POST" wire:submit.prevent="updatePost">
                         <!-- ID пользователя -->
                         <div class="form-group">
                             <label for="userId">
                                 ID пользователя<span class="required">*</span>
                             </label>
-                            <?//TODO: Заменить на Select?>
-                            <select name="userId" id="userId">
+
+                            <select name="user_id"  wire:model="user_id" id="user_id">
                                 @foreach($postData['allUsers']['result'] as $userItem)
-                                    @if($userItem['id']==$postData['result'][0]['user_id'])
+                                    @if($userItem['id']==$user_id)
                                         <option value="{{$userItem['id']}}" selected>{{$userItem['name']}}</option>
                                     @else
                                         <option value="{{$userItem['id']}}">{{$userItem['name']}}</option>
@@ -49,7 +54,7 @@
                                     name="title"
                                     placeholder="Введите название поста"
                                     maxlength="255"
-                                    value="<?=$postData['result'][0]['title']?>"
+                                    wire:model="title"
                                     required
                             >
                         </div>
@@ -65,7 +70,8 @@
                                     placeholder="Введите содержимое поста..."
                                     rows="5"
                                     required
-                            ><?=$postData['result'][0]['content']?></textarea>
+                                    wire:model="content"
+                            >{{$content}}</textarea>
                         </div>
 
                         <!-- Статус (выпадающий список) -->
@@ -73,13 +79,13 @@
                             <label for="status">
                                 Статус<span class="required">*</span>
                             </label>
-                            <select id="status" name="status" required>
+                            <select id="status" name="status" wire:model="status" required>
                                 <option value="" disabled>Выберите статус</option>
-                                <option value="{{$postData['result'][0]['status']}}" selected>{{$postData['statusList'][$postData['result'][0]['status']]}}</option>
+                                <option value="{{$status}}" selected>{{$statusList[$status]}}</option>
 
 
                                 @foreach($postData['statusList'] as $key => $statusItem)
-                                    @if($key!==$this->postData['result'][0]['status'])
+                                    @if($key!==$status)
                                         <option value="{{$key}}">{{$statusItem}}</option>
                                     @endif
                                 @endforeach
