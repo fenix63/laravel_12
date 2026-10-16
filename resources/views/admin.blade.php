@@ -596,10 +596,10 @@
                             <livewire:showpost-component :post_id="$postItem['id']" />
 
 
-
                             <livewire:editpost-component :post_id="$postItem['id']" />
+                            <livewire:delete-post-component :post_id="$postItem['id']" />
 
-                            <button class="btn-sm delete"><i class="fas fa-trash-alt"></i> </button>
+
                         </div>
                     </td>
                 </tr>
