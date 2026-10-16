@@ -44,26 +44,13 @@ class EditPostComponent extends Component
 			['user_id', 'title', 'content', 'status']
 		);
 
-		MessageController::dbgLog($this->postData,'postDataFromDataBase');
 
 		//$this->post_id = $this->postData['result'][0]['post_id'];
 		$this->user_id = $this->postData['result'][0]['user_id'];
 		$this->title = $this->postData['result'][0]['title'];
 		$this->content = $this->postData['result'][0]['content'];
-		//$this->status = $this->statusList[$this->postData['result'][0]['status']];
 		$this->status = $this->postData['result'][0]['status'];
 
-
-		/*MessageController::dbgLog(
-			[
-				'post_id' => $this->post_id,
-				'title' => $this->title,
-				'user_id' => $this->user_id,
-				'content' => $this->content,
-				'status' => $this->status
-			],
-			'_ControllerData'
-		);*/
 
 		//$userId = $this->postData['result'][0]['user_id'];
 		$this->postData['allUsers'] = UserController::getAllUsers(['id', 'name']);

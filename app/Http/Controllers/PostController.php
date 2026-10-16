@@ -19,7 +19,6 @@ class PostController extends Controller
 	public function showPostItem(int $id)
 	{
 		$postData = Post::getPostById($id);
-		$postData = $postData->getData(assoc: true);
 
 		//Получаем комментарии к этому посту
 		$comments = CommentController::getPostComments($id)->getData(true);
