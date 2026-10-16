@@ -593,7 +593,7 @@
                     <td data-label="Дата"></td>
                     <td data-label="Действия" style="text-align: right;">
                         <div class="actions-cell" style="justify-content: flex-end;">
-                            <livewire:showpost-component />
+                            <livewire:showpost-component :post_id="$postItem['id']" />
 
 
 
