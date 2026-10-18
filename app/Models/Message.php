@@ -19,7 +19,7 @@ class Message extends Model
 
 		$users = self::whereIn('id', $value)->get($select);
 
-		MessageController::dbgLog($users,'_users_');
+		//MessageController::dbgLog($users,'_users_');
 
 		return $users;
 	}
@@ -39,7 +39,7 @@ class Message extends Model
 		$obj->text = $text;
 		$obj->save();
 
-		MessageController::dbgLog($obj->getAttribute('id'),'_add_users_');
+		//MessageController::dbgLog($obj->getAttribute('id'),'_add_users_');
 
 		return $obj->getAttribute('id');
 	}
@@ -64,7 +64,7 @@ class Message extends Model
 	public static function deleteRecord(int $recordId)
 	{
 		$result = self::destroy($recordId);
-		MessageController::dbgLog($result,'delete_result_');
+		//MessageController::dbgLog($result,'delete_result_');
 
 
 		return $result;
