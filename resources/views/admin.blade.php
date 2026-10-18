@@ -528,9 +528,9 @@
 
         <div class="filter-select">
             <i class="fas fa-filter"></i>
-            <select>
+            <select id="statusFilter" onchange="filterByStatus()">
                 <option value="">Все статусы</option>
-                <option value="published" selected>Опубликовано</option>
+                <option value="published">Опубликовано</option>
                 <option value="draft">Черновик</option>
                 <option value="archived">Архив</option>
             </select>
@@ -565,21 +565,11 @@
             </tr>
             </thead>
             <tbody>
-            <!-- Пост 1 -->
-            <?
-                /*foreach($data['result'] as &$postItem){
-					$createdAt = new DateTime($postItem['created_at']);
-					$postItem['created_at_formatted'] = $createdAt->format('d.m.Y');
-                }*/
 
-//                echo '<pre>';
-//                print_r($data['result']);
-//                echo '</pre>';
-            ?>
 
             @foreach($data['result'] as $postItem)
 
-                <tr data-id="{{$postItem['id']}}">
+                <tr data-id="{{$postItem['id']}}" data-status="{{$postItem['status']}}">
                     <td class="checkbox-col" data-label="Выбрать"><input type="checkbox"></td>
                     <td data-label="Заголовок">
                         <span class="post-title">
@@ -589,7 +579,12 @@
                         </span>
                         <span class="post-meta"><i class="far fa-user-circle"></i> Имя и отчество автора поста</span>
                     </td>
-                    <td data-label="Статус"><span class="status-badge published"><i class="fas fa-circle" style="font-size: 0.4rem;"></i>{{$postItem['status']}}</span></td>
+                    <td data-label="Статус">
+                        <span class="status-badge {{ $postItem['status'] }}">
+                            <i class="fas fa-circle" style="font-size: 0.4rem;"></i>
+                            {{$postItem['status']}}
+                        </span>
+                    </td>
                     <td data-label="Дата"></td>
                     <td data-label="Действия" style="text-align: right;">
                         <div class="actions-cell" style="justify-content: flex-end;">
@@ -626,5 +621,49 @@
 */?>
 
 </div>
+
+<script>
+    /**
+     * Фильтрация постов по статусу.
+     * Скрывает строки таблицы, у которых data-status не совпадает с выбранным фильтром.
+     */
+    function filterByStatus() {
+        const select = document.getElementById('statusFilter');
+        const selectedValue = select.value; // '' — все статусы; 'published', 'draft', 'archived'
+
+        // Все строки таблицы
+        const rows = document.querySelectorAll('.posts-table tbody tr[data-status]');
+
+        rows.forEach(function(row) {
+            const rowStatus = row.getAttribute('data-status');
+
+            if (!selectedValue) {
+                // Пустой фильтр — показываем все
+                row.style.display = '';
+            } else if (rowStatus === selectedValue) {
+                // Статус совпадает с выбранным — показываем
+                row.style.display = '';
+            } else {
+                // Статус не совпадает — скрываем
+                row.style.display = 'none';
+            }
+        });
+
+        console.log('Фильтр статуса: "' + selectedValue + '" — показано строк:', 
+                    Array.from(rows).filter(r => r.style.display !== 'none').length);
+    }
+
+    // Кнопка «Сбросить фильтры»
+    document.addEventListener('DOMContentLoaded', function () {
+        const resetBtn = document.querySelector('.btn-icon[title="Сбросить фильтры"]');
+        if (resetBtn) {
+            resetBtn.addEventListener('click', function () {
+                document.getElementById('statusFilter').value = '';
+                filterByStatus();
+            });
+        }
+    });
+</script>
+
 </body>
 </html>
