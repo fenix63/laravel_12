@@ -50,6 +50,8 @@
     </div>
 
     <!-- ТАБЛИЦА -->
+
+
     <div class="posts-table-wrap">
         <table class="posts-table">
             <thead>
@@ -65,46 +67,46 @@
             </thead>
             <tbody>
             @forelse($posts as $postItem)
-            <tr wire:key="post-{{ $postItem->id }}" data-id="{{ $postItem->id }}">
-                <td class="checkbox-col" data-label="Выбрать">
-                    <input type="checkbox"
-                           wire:model.live="selected"
-                           value="{{ $postItem->id }}">
-                </td>
-                <td data-label="Заголовок">
-                        <span class="post-title">
-                            <a href="{{ route('posts.show', $postItem->id) }}" target="_blank">
-                                {{ $postItem->title }} ({{ $postItem->id }})
-                            </a>
-                        </span>
-                    <span class="post-meta">
-                            <i class="far fa-user-circle"></i>
-                            {{ $postItem->author_name ?? '—' }}
-                        </span>
-                </td>
-                <td data-label="Статус">
-                        <span class="status-badge {{ $postItem->status }}">
-                            <i class="fas fa-circle" style="font-size: 0.4rem;"></i>
-                            {{ $postItem->status }}
-                        </span>
-                </td>
-                <td data-label="Дата">
-                    {{ $postItem->created_at?->format('d.m.Y H:i') }}
-                </td>
-                <td data-label="Действия" style="text-align: right;">
-                    <div class="actions-cell" style="justify-content: flex-end;">
-                        <livewire:showpost-component
-                                :post_id="$postItem->id"
-                                :key="'show-'.$postItem->id" />
-                        <livewire:editpost-component
-                                :post_id="$postItem->id"
-                                :key="'edit-'.$postItem->id" />
-                        <livewire:delete-post-component
-                                :post_id="$postItem->id"
-                                :key="'del-'.$postItem->id" />
-                    </div>
-                </td>
-            </tr>
+                <tr wire:key="post-{{ $postItem->id }}" data-id="{{ $postItem->id }}">
+                    <td class="checkbox-col" data-label="Выбрать">
+                        <input type="checkbox"
+                               wire:model.live="selected"
+                               value="{{ $postItem->id }}">
+                    </td>
+                    <td data-label="Заголовок">
+                            <span class="post-title">
+                                <a href="/posts/{{$postItem['id']}}" target="_blank">
+                                    {{ $postItem->title }} ({{ $postItem->id }})
+                                </a>
+                            </span>
+                        <span class="post-meta">
+                                <i class="far fa-user-circle"></i>
+                                {{ $postItem->author_name ?? '—' }}
+                            </span>
+                    </td>
+                    <td data-label="Статус">
+                            <span class="status-badge {{ $postItem->status }}">
+                                <i class="fas fa-circle" style="font-size: 0.4rem;"></i>
+                                {{ $postItem->status }}
+                            </span>
+                    </td>
+                    <td data-label="Дата">
+                        {{ $postItem->created_at?->format('d.m.Y H:i') }}
+                    </td>
+                    <td data-label="Действия" style="text-align: right;">
+                        <div class="actions-cell" style="justify-content: flex-end;">
+                            <livewire:showpost-component
+                                    :post_id="$postItem->id"
+                                    :key="'show-'.$postItem->id" />
+                            <livewire:editpost-component
+                                    :post_id="$postItem->id"
+                                    :key="'edit-'.$postItem->id" />
+                            <livewire:delete-post-component
+                                    :post_id="$postItem->id"
+                                    :key="'del-'.$postItem->id" />
+                        </div>
+                    </td>
+                </tr>
             @empty
             <tr>
                 <td colspan="5" style="text-align:center; padding: 40px;">

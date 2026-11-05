@@ -8,7 +8,8 @@
 
     <!-- Модальное окно -->
     @if($showModal)
-        <div class="modal-overlay" wire:click.self="closeModal">
+        <div>Контент модального окна</div>
+        <?/*<div class="modal-overlay" wire:click.self="closeModal">
             <div class="modal-content">
                 <div class="modal-header">
                     <h3>Создание поста</h3>
@@ -103,7 +104,7 @@
                 </div>
 
             </div>
-        </div>
+        </div>*/?>
     @endif
 </div>
 

@@ -1,36 +1,20 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-/*
-Route::get('/posts',[PostController::class,'index']);
-Route::get('/posts/{id}',[PostController::class,'show'])->name('postdetail');
-Route::get('/posts/{id}/edit',[PostController::class,'edit'])->name('postedit');
-Route::post('/posts/{id}/edit',[PostController::class,'update'])->name('postupdate');
-*/
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
-Route::get('/posts', function (Request $request) {
-	$obj = new PostController();
-	$posts = $obj->show($request);
-	return view('home', ['posts' => $posts['result']]);
-})->name('home');
-
-//Route::get('/posts',[PostController::class,'home']);
-
-/*Route::get('/post/{id}', function (Request $request) {
-	$obj = new PostController();
-	$postData = $obj->getPost($request);
-	return view('postitem');
-})->name('postitem');
-*/
-
-//Route::get('/postitem/{id}', [PostController::class, 'showPostItem'])->name('postitem');
-Route::get('/posts/{id}', [PostController::class, 'showPostItem'])->name('postitem');
-Route::get('/admin', [PostController::class, 'showAdminPage'])->name('admin');
+require __DIR__.'/auth.php';

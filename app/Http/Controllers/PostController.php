@@ -30,7 +30,8 @@ class PostController extends Controller
 	{
 		$allPosts = Post::all();
 		$allPostsArray = response()->json(['result' => $allPosts])->getData(assoc: true);
-		return view('admin', ['data' => $allPostsArray]);
+		//return view('admin', ['data' => $allPostsArray]);
+		return view('admin.posts', ['data' => $allPostsArray]);
 	}
 
     /**

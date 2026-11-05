@@ -21,6 +21,9 @@ class ModalComponent extends Component
 
 	public function render()
 	{
+		if (empty($this->users)) {
+			$this->users = ['result' => []];
+		}
 		return view('livewire.modal-component');
 	}
 

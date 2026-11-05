@@ -565,61 +565,36 @@
             </tr>
             </thead>
             <tbody>
-
-
-            @foreach($data['result'] as $postItem)
-
-                <tr data-id="{{$postItem['id']}}" data-status="{{$postItem['status']}}">
-                    <td class="checkbox-col" data-label="Выбрать"><input type="checkbox"></td>
-                    <td data-label="Заголовок">
-                        <span class="post-title">
-                            <a href="/posts/{{$postItem['id']}}" target="_blank">
-                                {{$postItem['title']}} ({{$postItem['id']}})
-                            </a>
-                        </span>
-                        <span class="post-meta"><i class="far fa-user-circle"></i> Имя и отчество автора поста</span>
-                    </td>
-                    <td data-label="Статус">
-                        <span class="status-badge {{ $postItem['status'] }}">
-                            <i class="fas fa-circle" style="font-size: 0.4rem;"></i>
-                            {{$postItem['status']}}
-                        </span>
-                    </td>
-                    <td data-label="Дата"></td>
-                    <td data-label="Действия" style="text-align: right;">
-                        <div class="actions-cell" style="justify-content: flex-end;">
-                            <livewire:showpost-component :post_id="$postItem['id']" />
-
-
-                            <livewire:editpost-component :post_id="$postItem['id']" />
-                            <livewire:delete-post-component :post_id="$postItem['id']" />
-
-
-                        </div>
-                    </td>
-                </tr>
-            @endforeach
-
+                @foreach($data['result'] as $postItem)
+                    <tr data-id="{{$postItem['id']}}" data-status="{{$postItem['status']}}">
+                        <td class="checkbox-col" data-label="Выбрать"><input type="checkbox"></td>
+                        <td data-label="Заголовок">
+                            <span class="post-title">
+                                <a href="/posts/{{$postItem['id']}}" target="_blank">
+                                    {{$postItem['title']}} ({{$postItem['id']}})
+                                </a>
+                            </span>
+                            <span class="post-meta"><i class="far fa-user-circle"></i> Имя и отчество автора поста</span>
+                        </td>
+                        <td data-label="Статус">
+                            <span class="status-badge {{ $postItem['status'] }}">
+                                <i class="fas fa-circle" style="font-size: 0.4rem;"></i>
+                                {{$postItem['status']}}
+                            </span>
+                        </td>
+                        <td data-label="Дата"></td>
+                        <td data-label="Действия" style="text-align: right;">
+                            <div class="actions-cell" style="justify-content: flex-end;">
+                                <livewire:showpost-component :post_id="$postItem['id']" />
+                                <livewire:editpost-component :post_id="$postItem['id']" />
+                                <livewire:delete-post-component :post_id="$postItem['id']" />
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
-
-        <!-- ПАГИНАЦИЯ -->
-        <?/*<div class="pagination-bar">
-            <div class="pagination-info">
-                <span class="fw-500">1–5</span> из <span class="fw-500">24</span> постов
-            </div>
-            <div class="pagination-buttons">
-                <button class="page-btn"><i class="fas fa-chevron-left"></i></button>
-                <button class="page-btn active">1</button>
-                <button class="page-btn">2</button>
-                <button class="page-btn">3</button>
-                <button class="page-btn">4</button>
-                <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
-            </div>
-        </div>
     </div>
-*/?>
-
 </div>
 
 <script>
